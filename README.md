@@ -1,7 +1,7 @@
 coffee-processing
 =================
 
-Helps writing processing.js sketches in Coffeescript.
+Helps writing Processing.js sketches in Coffeescript.
 
 Installation
 ------------
@@ -21,7 +21,7 @@ Or install it yourself as:
 Usage
 -----
 
-Sample sketch in Coffeescript.
+A sample Processing.js sketch written in Coffeescript with the help of coffee-processing.
 ```coffee
 setup = ->
   size $(window).width(), $(window).height()
@@ -29,12 +29,13 @@ setup = ->
   background 255
 
 draw = ->
-  s = random(100)
-  stroke random(255), random(255), random(255)
-  ellipse random(width()), random(height()), s, s
+  for i in [0..10]
+    s = random(100)
+    stroke random(255), random(255), random(255)
+    ellipse random(width()), random(height()), s, s
 ```
 
-Ruby code for compiling it into Javascript
+Ruby code for compiling it into Javascript.
 ```ruby
 require 'coffee-processing'
 
@@ -67,7 +68,7 @@ Caveats
 -------
 
 Instance variables of Processing object, such as `width`, `frameCount` and `__mousePressed` (among others)
-should be accessed through their corresponding shortcut functions.
+should be accessed through their corresponding shortcut functions as follows.
 
 ```coffee
 # P3D, __mousePressed, frameCount, width and height are functions, not values.
@@ -81,8 +82,7 @@ draw = ->
 ```
 
 Or equivalently, you can access them as the properties of `processing` object.
-
-This is slightly more efficient since there is no need to invoke shortcut functions.
+This is slightly more efficient.
 
 ```coffee
 # Alias for processing instance

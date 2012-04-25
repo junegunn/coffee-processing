@@ -6,6 +6,7 @@ setup = ->
   background 255
 
 draw = ->
-  s = random(100)
-  stroke random(255), random(255), random(255)
-  ellipse random(width()), random(height()), s, s
+  for i in [0..10]
+    s = random(100)
+    stroke random(255), random(255), random(255)
+    ellipse random(width()), random(height()), s, s
