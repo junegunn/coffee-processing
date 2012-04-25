@@ -1,0 +1,26 @@
+<%= javascript_object %> = (__p5) ->
+  for __sym of __p5 when eval("typeof #{__sym} === 'undefined'")
+    if typeof __p5[__sym] == 'function'
+      eval "var #{__sym} = function() { return __p5.#{__sym}.apply(__p5, arguments) }"
+    else
+      eval "var #{__sym} = function() { return __p5.#{__sym} }"
+  null
+
+  <%= code %>
+
+  for callback in [
+    'setup',
+    'draw',
+    'mouseClicked',
+    'mouseDragged',
+    'mouseMoved',
+    'mouseOut',
+    'mouseOver',
+    'mousePressed',
+    'mouseReleased',
+    'keyPressed',
+    'keyReleased',
+    'keyTyped'
+  ] when !eval("typeof #{__sym} === 'undefined'")
+    eval "__p5.#{callback} = #{callback}"
+
