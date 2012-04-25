@@ -66,11 +66,11 @@ usage: coffee-processing [--template] <js object name> <sketch file>
 Caveats
 -------
 
-Non-method instance variables, such as `width`, `frameCount` and `__mousePressed` (among others)
+Instance variables of Processing object, such as `width`, `frameCount` and `__mousePressed` (among others)
 should be accessed through their corresponding shortcut functions.
 
 ```coffee
-// P3D, __mousePressed, frameCount, width and height are functions, not values.
+# P3D, __mousePressed, frameCount, width and height are functions, not values.
 
 setup = ->
   size 100, 100, P3D()
@@ -80,7 +80,8 @@ draw = ->
     point frameCount() % width(), frameCount() % height()
 ```
 
-Or equivalently, you can directly access them as the properties of `processing` object.
+Or equivalently, you can access them as the properties of `processing` object.
+
 This is slightly more efficient since there is no need to invoke shortcut functions.
 
 ```coffee
@@ -98,7 +99,7 @@ draw = ->
 Examples
 --------
 
-Checkout examples directory.
+Check out [examples](https://github.com/junegunn/coffee-processing/tree/master/examples) directory.
 
 Contributing
 ------------
