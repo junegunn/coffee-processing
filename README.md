@@ -58,7 +58,7 @@ coffee-processing script
 ```
 usage: coffee-processing [--template] <js object name> <sketch file>
 
-        --template                   Creates a template page for the sketch
+        --template                   Create a template page for the sketch
     -h, --help                       Show this message
 ```
 

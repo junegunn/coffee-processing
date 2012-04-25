@@ -11,7 +11,7 @@ op = OptionParser.new do |opts|
     "usage: coffee-processing [--template] <js object name> <sketch file>"
   opts.separator ''
 
-  opts.on('--template', 'Creates a template page for the sketch') do |v|
+  opts.on('--template', 'Create a template page for the sketch') do |v|
     options[:template] = v
   end
 
