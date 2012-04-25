@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '../lib') # FIXME
+require 'rubygems'
+require 'coffee-processing'
+require 'optparse'
+
+options = {}
+op = OptionParser.new do |opts|
+  opts.banner =
+    "usage: coffee-processing [--template] <js object name> <sketch file>"
+  opts.separator ''
+
+  opts.on('--template', 'Creates a template page for the sketch') do |v|
+    options[:template] = v
+  end
+
+  opts.on('-h', '--help', 'Show this message') do
+    puts opts
+    exit 0
+  end
+end
+
+op.parse! ARGV
+
+if ARGV.length != 2
+  puts op
+  exit 1
+end
+
+unless File.exists?(ARGV[1])
+  puts "#{ARGV[1]} does not exist."
+  puts op
+  exit 1
+end
+
+if options[:template]
+  name = File.basename(ARGV[1]).chomp(File.extname(ARGV[1]))
+  CoffeeProcessing.generate_template_page ARGV[0], File.read(ARGV[1]), name
+  puts "Created #{name} directory."
+else
+  puts CoffeeProcessing.compile ARGV[0], File.read(ARGV[1])
+end
+

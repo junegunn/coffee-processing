@@ -1,9 +1,9 @@
-<%= javascript_object %> = (__p5) ->
-  for __sym of __p5 when eval("typeof #{__sym} === 'undefined'")
-    if typeof __p5[__sym] == 'function'
-      eval "var #{__sym} = function() { return __p5.#{__sym}.apply(__p5, arguments) }"
+<%= javascript_object %> = (processing) ->
+  for __sym of processing when eval("typeof #{__sym} === 'undefined'")
+    if typeof processing[__sym] == 'function'
+      eval "var #{__sym} = function() { return processing.#{__sym}.apply(processing, arguments) }"
     else
-      eval "var #{__sym} = function() { return __p5.#{__sym} }"
+      eval "var #{__sym} = function() { return processing.#{__sym} }"
   null
 
   <%= code %>
@@ -22,5 +22,5 @@
     'keyReleased',
     'keyTyped'
   ] when !eval("typeof #{__sym} === 'undefined'")
-    eval "__p5.#{callback} = #{callback}"
+    eval "processing.#{callback} = #{callback}"
 

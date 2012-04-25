@@ -1,8 +1,10 @@
-# coffee-processing
+coffee-processing
+=================
 
 Write a processing.js sketch in concise Coffeescript.
 
-## Installation
+Installation
+------------
 
 Add this line to your application's Gemfile:
 
@@ -16,28 +18,46 @@ Or install it yourself as:
 
     $ gem install coffee-processing
 
-## Usage
+Usage
+-----
 
 Sample sketch in Coffeescript.
 ```coffee
+setup = ->
+  size $(window).width(), $(window).height()
+  frameRate 30
+  background 255
+
+draw = ->
+  s = random(100)
+  stroke random(255), random(255), random(255)
+  ellipse random(width()), random(height()), s, s
 ```
 
 Ruby code for compiling it into Javascript
 ```ruby
 require 'coffee-processing'
 
-File.open('sample.js', 'w') do |f|
+File.open('compiled.js', 'w') do |f|
   f << CoffeeProcessing.compile('this.sample', code)
 end
 ```
 
-HTML template
-```html
+coffee-processing script
+------------------------
+
+```
+usage: coffee-processing [--template] <js object name> <sketch file>
+
+        --template                   Creates a template page for the sketch
+    -h, --help                       Show this message
 ```
 
-## Caveats
 
-Non-method instance variables, such as width, frameCount and __mousePressed (among others)
+Caveats
+-------
+
+Non-method instance variables, such as `width`, `frameCount` and `__mousePressed` (among others)
 should be accessed through their corresponding shortcut functions.
 
 ```coffee
@@ -51,19 +71,28 @@ draw = ->
     point frameCount() % width(), frameCount() % height()
 ```
 
-Or equivalently, you can just access them explicitly via Processing object.
-This is slightly more efficient. (no need to invoke shortcut functions)
+Or equivalently, you can directly access them as the properties of `processing` object.
+This is slightly more efficient since there is no need to invoke shortcut functions.
 
 ```coffee
-setup = (p5) ->
+# Alias for processing instance
+p5 = processing
+
+setup = ->
   size 100, 100, p5.P3D
 
-draw = (p5) ->
+draw = ->
   if p5.__mousePressed
     point p5.frameCount % p5.width, p5.frameCount % p5.height
 ```
 
-## Contributing
+Examples
+--------
+
+Checkout examples directory.
+
+Contributing
+------------
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)

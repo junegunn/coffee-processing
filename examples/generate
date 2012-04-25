@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Junegunn Choi (junegunn.c@gmail.com)
+# 2012/04/25-
+
+../bin/coffee-processing --template this.sketch dots.coffee
+../bin/coffee-processing --template this.sketch lines.coffee
+
