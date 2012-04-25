@@ -31,7 +31,6 @@ draw = ->
 
     assert_equal 1, 
       [without_indentation, with_space_indentation, with_tab_indentation].map { |code|
-        puts CoffeeProcessing.compile 'this.sketch', code
         CoffeeProcessing.compile 'this.sketch', code
       }.uniq.length
   end
