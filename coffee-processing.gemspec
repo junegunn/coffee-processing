@@ -4,9 +4,9 @@ require File.expand_path('../lib/coffee-processing/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Junegunn Choi"]
   gem.email         = ["junegunn.c@gmail.com"]
-  gem.description   = %q{Write Processing.js sketches in Coffeescript}
-  gem.summary       = %q{Write Processing.js sketches in Coffeescript}
-  gem.homepage      = ""
+  gem.description   = %q{Helps writing Processing.js sketches in Coffeescript}
+  gem.summary       = %q{Helps writing Processing.js sketches in Coffeescript}
+  gem.homepage      = "https://github.com/junegunn/coffee-processing"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

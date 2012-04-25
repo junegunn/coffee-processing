@@ -1,7 +1,7 @@
 coffee-processing
 =================
 
-Write a processing.js sketch in concise Coffeescript.
+Helps writing processing.js sketches in Coffeescript.
 
 Installation
 ------------
@@ -39,8 +39,17 @@ Ruby code for compiling it into Javascript
 require 'coffee-processing'
 
 File.open('compiled.js', 'w') do |f|
-  f << CoffeeProcessing.compile('this.sample', code)
+  f << CoffeeProcessing.compile('this.sketch', code)
 end
+```
+
+And the HTML page.
+```html
+<script src='compiled.js' type='text/javascript'></script>
+<canvas id='sketch'></canvas>
+<script type='text/javascript'>
+  var processing = new Processing(document.getElementById("sketch"), this.sketch)
+</script>
 ```
 
 coffee-processing script
