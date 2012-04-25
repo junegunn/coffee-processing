@@ -34,4 +34,10 @@ draw = ->
         CoffeeProcessing.compile 'this.sketch', code
       }.uniq.length
   end
+
+  def test_error
+    pend('Need to adjust line number (-8) in exception message') do
+      CoffeeProcessing.compile 'this.sketch', '-> = ->'
+    end
+  end
 end
