@@ -101,6 +101,8 @@ Examples
 
 Check out [examples](https://github.com/junegunn/coffee-processing/tree/master/examples) directory.
 
+Also check out [a Sinatra demo app](https://github.com/junegunn/coffee-processing-live).
+
 Contributing
 ------------
 
