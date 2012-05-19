@@ -67,14 +67,15 @@ usage: coffee-processing [--template] <js object name> <sketch file>
 Caveats
 -------
 
-Instance variables of Processing object, such as `width`, `frameCount` and `__mousePressed` (among others)
+Non-constant, instance variables of Processing object,
+such as `width`, `frameCount` and `__mousePressed` (among others)
 should be accessed through their corresponding shortcut functions as follows.
 
 ```coffee
-# P3D, __mousePressed, frameCount, width and height are functions, not values.
+# __mousePressed, frameCount, width and height are functions, not values.
 
 setup = ->
-  size 100, 100, P3D()
+  size 100, 100, P3D
 
 draw = ->
   if __mousePressed()
@@ -89,7 +90,7 @@ This is slightly more efficient.
 p5 = processing
 
 setup = ->
-  size 100, 100, p5.P3D
+  size 100, 100, P3D
 
 draw = ->
   if p5.__mousePressed

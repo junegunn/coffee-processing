@@ -4,7 +4,13 @@
       eval "var #{__sym} = function() { return __processing.#{__sym}.apply(__processing, arguments) }"
     else
       eval "var #{__sym} = function() { return __processing.#{__sym} }"
-  null
+
+  for __const of __processing.PConstants
+    eval "var #{__const} = __processing.PConstants.#{__const}"
+
+  for __sym in ['ArrayList', 'HashMap', 'PVector', 'ObjectIterator', 'PConstants']
+    eval "var #{__sym} = __processing.#{__sym}"
+
   processing = __processing
 
   <%= code %>
