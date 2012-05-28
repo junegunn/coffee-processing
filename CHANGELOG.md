@@ -1,3 +1,7 @@
+0.0.4
+=====
+- Correctly adjusts line number in parse error message
+
 0.0.3
 =====
 - Constants (e.g. `P3D`, `RGB`) are now directly accessible without `processing` variable or shortcut methods.

@@ -13,15 +13,24 @@ module CoffeeProcessing
     code = code.lines.map { |line| "#{line}  " }.join
     code = code.strip
 
-    CoffeeScript.compile(
-      Erubis::Eruby.new(
-        File.read File.join(
-          File.dirname(__FILE__),
-          'coffee-processing',
-          'boilerplate.coffee.erb'
-        )
-      ).result(binding)
-    )
+    begin
+      CoffeeScript.compile(
+        Erubis::Eruby.new(
+          File.read File.join(
+            File.dirname(__FILE__),
+            'coffee-processing',
+            'boilerplate.coffee.erb'
+          )
+        ).result(binding)
+      )
+    rescue ExecJS::ProgramError => e
+      message = e.message
+      if match = message.match(/line ([1-9][0-9]*):/)
+        range = Range.new(*match.offset(1), true)
+        message[ range ] = (match[1].to_i - 15).to_s
+      end
+      raise e, message, e.backtrace
+    end
   end
 
   def self.generate_template_page javascript_object, code, output_dir

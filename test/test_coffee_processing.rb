@@ -36,8 +36,11 @@ draw = ->
   end
 
   def test_error
-    pend('Need to adjust line number (-8) in exception message') do
-      CoffeeProcessing.compile 'this.sketch', '-> = ->'
+    begin
+      CoffeeProcessing.compile 'this.sketch', %w[1 2 3 ? 5].join($/)
+      assert false, 'Exception should have been raised'
+    rescue ExecJS::ProgramError => e
+      assert e.to_s =~ /line 4:/, 'Unadjusted line number'
     end
   end
 end
