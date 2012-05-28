@@ -14,7 +14,7 @@ exag = (v, times) ->
 setup = ->
   size $(window).width(), $(window).height()
   frameRate 30
-  colorMode RGB(), 1.0
+  colorMode RGB, 1.0
   background 1
   stroke 0, 0.1
 
