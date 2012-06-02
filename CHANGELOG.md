@@ -1,3 +1,7 @@
+0.0.6
+=====
+- Minor bug fix
+
 0.0.5
 =====
 - Experimental image/font preloading.

@@ -38,7 +38,7 @@
       window.setTimeout __polling, interval
     else
       __inject()
-      setup() if (typeof setup)?
+      setup() if setup?
 
   if preload?
     if preload.fonts?
