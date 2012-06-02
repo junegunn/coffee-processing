@@ -43,4 +43,38 @@ draw = ->
       assert e.to_s =~ /line 4:/, 'Unadjusted line number'
     end
   end
+
+  def test_preload_font
+    require 'fileutils'
+    code = "
+preload =
+  fonts: ['data/Bountiful.ttf']
+  images: ['data/header.png']
+
+font = null
+
+setup = ->
+  size 300, 300
+  frameRate 1
+  background 255
+  image loadImage('data/header.png'), 0, 0
+  fill 0
+  font = createFont('data/Bountiful.ttf', 0)
+  textFont font, 30
+  text 'Hello world', 50, 50
+
+mousePressed = ->
+  background random 255
+  fill random 255
+  text 'Hello world', random(50), random(50)
+
+draw = ->
+  console.log 'draw'
+"
+    output = File.join(File.dirname(__FILE__), 'output')
+    output_f = File.join(output, 'data')
+    FileUtils.mkdir_p output_f
+    FileUtils.cp File.join(File.dirname(__FILE__), 'data/Bountiful.ttf'), output_f
+    CoffeeProcessing.generate_template_page 'this.sketch', code, output
+  end
 end

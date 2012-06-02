@@ -53,6 +53,29 @@ And the HTML page.
 </script>
 ```
 
+Preloading (Experimental)
+-------------------------
+
+Asynchronous nature of Javascript requires preloading of images and fonts and
+Processing.js allows you to preload assets with [@pjs directives](http://processingjs.org/reference/pjs%20directive/).
+However they are only applied on compilation of native Processing code,
+and there's currenty no direct way to preload in Javascript-only Processing.js code. 
+
+If you define `preload` object in your coffee-processing code as the following example,
+coffee-processing will delay execution until those assets are ready.
+(Although the way it does so seems quite hacky and might break in the future.)
+
+```coffee
+preload =
+  images: ['/images/image1.png', '/images/image2.png']
+  fonts:  ['/fonts/font.ttf']
+
+setup = ->
+  font = createFont '/fonts/font.ttf', 0 
+  img1 = loadImage '/images/image1.png'
+  img2 = loadImage '/images/image2.png'
+```
+
 coffee-processing script
 ------------------------
 

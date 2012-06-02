@@ -1,4 +1,4 @@
-<%= javascript_object %> = (__processing) ->
+<%= javascript_object %> = new Processing.Sketch (__processing) ->
   for __sym of __processing when eval("typeof #{__sym} === 'undefined'")
     if typeof __processing[__sym] == 'function'
       eval "var #{__sym} = function() { return __processing.#{__sym}.apply(__processing, arguments) }"
@@ -15,19 +15,41 @@
 
   <%= code %>
 
-  for callback in [
-    'setup',
-    'draw',
-    'mouseClicked',
-    'mouseDragged',
-    'mouseMoved',
-    'mouseOut',
-    'mouseOver',
-    'mousePressed',
-    'mouseReleased',
-    'keyPressed',
-    'keyReleased',
-    'keyTyped'
-  ] when !eval("typeof #{__sym} === 'undefined'")
-    eval "__processing.#{callback} = #{callback}"
+  __inject = ->
+    for callback in [
+      'setup',
+      'draw',
+      'mouseClicked',
+      'mouseDragged',
+      'mouseMoved',
+      'mouseOut',
+      'mouseOver',
+      'mousePressed',
+      'mouseReleased',
+      'keyPressed',
+      'keyReleased',
+      'keyTyped'
+    ] when !eval("typeof #{__sym} === 'undefined'")
+      eval "__processing.#{callback} = #{callback}"
+
+  __polling = ->
+    interval = 100
+    if __processing.externals.sketch.imageCache.pending or __processing.PFont.preloading.pending(interval)
+      window.setTimeout __polling, interval
+    else
+      __inject()
+      setup() if (typeof setup)?
+
+  if preload?
+    if preload.fonts?
+      for __font in preload.fonts
+        __processing.PFont.preloading.add __font
+    if preload.images?
+      for __image in preload.images
+        __processing.externals.sketch.imageCache.add __image
+
+    __processing.setup = -> __polling()
+    __processing.draw = -> null
+  else
+    __inject()
 

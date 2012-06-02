@@ -1,3 +1,7 @@
+0.0.5
+=====
+- Experimental image/font preloading.
+
 0.0.4
 =====
 - Correctly adjusts line number in parse error message
