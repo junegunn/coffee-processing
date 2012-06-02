@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Helps writing Processing.js sketches in Coffeescript}
   gem.homepage      = "https://github.com/junegunn/coffee-processing"
 
-  gem.files         = `git ls-files`.split($\)
+  gem.files         = `git ls-files | grep -v 'test/'`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "coffee-processing"
