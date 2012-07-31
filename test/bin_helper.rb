@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
-# gunn@daumcorp.com
+# junegunn.c@gmail.com
 
 # DISCLAIMER: 
 #   Not a real test!
