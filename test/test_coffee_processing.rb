@@ -74,7 +74,9 @@ draw = ->
     output = File.join(File.dirname(__FILE__), 'output')
     output_f = File.join(output, 'data')
     FileUtils.mkdir_p output_f
-    FileUtils.cp File.join(File.dirname(__FILE__), 'data/Bountiful.ttf'), output_f
+    Dir[File.expand_path('../data/*', __FILE__)].each do |f|
+      FileUtils.cp f, output_f
+    end
     CoffeeProcessing.generate_template_page 'this.sketch', code, output
   end
 end
